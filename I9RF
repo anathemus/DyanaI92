@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DyanaI9RF2
+{
+    class I9RF2
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Dyana's I9 Retention Form");
+            Console.WriteLine("Programmed by Benjamin Burgess, All Rights Reserved");
+            Console.Write("     ");
+            bool repeat = true;
+
+            while (repeat == true)
+            {
+                Console.WriteLine("Date of Hire:");
+                string HireDateS = Console.ReadLine();
+                // Reads input, Grabs date, puts into hiredate if valid
+                DateTime hiredate;
+                if (DateTime.TryParse(HireDateS, out hiredate))
+                {
+                    int ctr = 3;
+                    Console.WriteLine("{0,2} year(s) from Hire Date:   {1:d}",
+                                      ctr, hiredate.AddYears(ctr));
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Date Format"); // <-- Control flow goes here
+                }
+                DateTime hire = hiredate.AddYears(3);
+                Console.Write("     ");
+                Console.Write("     ");
+                Console.WriteLine("Date of Termination:");
+                string TermDateS = Console.ReadLine();
+                // Reads input, Grabs date, puts into termdate if valid
+                DateTime termdate;
+                if (DateTime.TryParse(TermDateS, out termdate))
+                {
+                    int ctr = 1;
+                    Console.WriteLine("{0,2} year(s) from Termination Date:   {1:d}",
+                                      ctr, termdate.AddYears(ctr));
+                    DateTime term = termdate.AddYears(ctr);
+
+                    int keepuntil = DateTime.Compare(hire, term);
+                    if (keepuntil < 0)
+                    {
+                        Console.Write("     ");
+                        Console.Write("     ");
+                        Console.WriteLine("Keep I9 documents until: {0,2}", term);
+                    }
+                    else
+                    {
+                        Console.Write("     ");
+                        Console.Write("     ");
+                        Console.WriteLine("Keep I9 documents until: {0,2}", hire);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Date Format"); // <-- Control flow goes here
+                }
+
+                Console.WriteLine("Go again? Y/N");
+                string go = Console.ReadLine();
+                if (go == "Y" || go == "y")
+                {
+                    repeat = true;
+                }
+                else
+                {
+                    repeat = false;
+                }
+            }
+            // Keep the console open in debug mode.
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+        }
+    }
+}
